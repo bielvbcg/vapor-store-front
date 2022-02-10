@@ -3,8 +3,10 @@ import { Link, useNavigate } from "react-router-dom"
 import styled from 'styled-components';
 import axios from 'axios';
 import joi from "joi"
-import AppContext from '../contexts/AppContext';
+import dotenv from 'dotenv';
+dotenv.config();
 
+import AppContext from '../contexts/AppContext';
 import Button from "./Button.js"
 import Input from "./Input.js"
 
@@ -35,7 +37,7 @@ export default function Login() {
       return
     }
 
-    const cadastro = axios.post("http://localhost:5000/login",
+    const cadastro = axios.post(`${process.env.REACT_APP_API_BASE_URL}/login`,
       {
         name,
         password,

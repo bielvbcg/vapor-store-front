@@ -1,28 +1,33 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { Link, useNavigate } from "react-router-dom"
 import styled from 'styled-components';
 import axios from 'axios';
 import joi from "joi"
-import AppContext from '../contexts/AppContext';
 
-export default function Login() {
+export default function SignUp() {
+  const [name, setName] = useState("")
   const [email, setEmail] = useState("")
-  const [password, setpassword] = useState("")
+  const [password, setPassword] = useState("")
+  const [confirmPassword, setConfirmPassword] = useState("")
   const [botaoClickado, setBotaoClickado] = useState(false)
-  const { setToken } = useContext(AppContext)
   let navigate = useNavigate()
 
-  function login(event) {
+  async function signUp(event) {
     event.preventDefault()
 
     setBotaoClickado(true)
 
     const signUpSchema = joi.object({
+      name: joi.string().required(),
       email: joi.string().email({ tlds: { allow: false } }).required(),
       password: joi.string().required()
     })
 
-    const user = { email, password }
+    const user = {
+      name,
+      email,
+      password,
+    }
 
     const validation = signUpSchema.validate(user, { abortEarly: true })
     if (validation.error) {
@@ -32,22 +37,31 @@ export default function Login() {
       return
     }
 
-    const cadastro = axios.post("http://localhost:5000/login",
-      {
-        email,
-        password,
-      })
+    if (password !== confirmPassword) {
+      alert("As senhas não batem")
+      setBotaoClickado(false)
+      return
+    }
+
+    const cadastro = axios.post("http://localhost:5000/sign-up", user)
 
     cadastro.then((r) => {
-      setToken(r.data.token)
+      navigate("/")
       setBotaoClickado(false)
-      navigate("/wallet")
+      cleanData()
     })
 
     cadastro.catch(error => {
-      alert(error.response.data)
+      alert(error.response.data.message)
       setBotaoClickado(false)
     })
+  }
+
+  function cleanData() {
+    setName("")
+    setEmail("")
+    setPassword("")
+    setConfirmPassword("")
   }
 
   return (
@@ -55,15 +69,17 @@ export default function Login() {
 
       <h1>Vapor Store</h1>
 
-      <form onSubmit={login}>
+      <form onSubmit={signUp}>
+        <input type="text" placeholder="Name" value={name} onChange={e => setName(e.target.value)} disabled={botaoClickado} />
         <input type="email" placeholder="E-mail" value={email} onChange={e => setEmail(e.target.value)} disabled={botaoClickado} />
-        <input type="password" placeholder="Senha" value={password} onChange={e => setpassword(e.target.value)} disabled={botaoClickado} />
+        <input type="password" placeholder="Senha" value={password} onChange={e => setPassword(e.target.value)} disabled={botaoClickado} />
+        <input type="password" placeholder="Confirme a senha" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} disabled={botaoClickado} />
 
-        <Button type='submit' disabled={botaoClickado}>Entrar</Button>
+        <Button type='submit' disabled={botaoClickado}>Cadastrar</Button>
 
       </form>
 
-      <StyledLink to={"/sign-up"}>Primeira vez? Cadastre-se!</StyledLink>
+      <StyledLink to={"/"}>Já tem uma conta? Entre agora!</StyledLink>
 
     </Main>
   )
@@ -100,6 +116,7 @@ const Main = styled.div`
     height: 45px;
 
     border: 1px solid #D5D5D5;
+    padding-left: 11px;
     border-radius: 5px;
 
     font-size: 17px;

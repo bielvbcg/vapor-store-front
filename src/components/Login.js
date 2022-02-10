@@ -5,8 +5,11 @@ import axios from 'axios';
 import joi from "joi"
 import AppContext from '../contexts/AppContext';
 
+import Button from "./Button.js"
+import Input from "./Input.js"
+
 export default function Login() {
-  const [email, setEmail] = useState("")
+  const [name, setName] = useState("")
   const [password, setpassword] = useState("")
   const [botaoClickado, setBotaoClickado] = useState(false)
   const { setToken } = useContext(AppContext)
@@ -18,11 +21,11 @@ export default function Login() {
     setBotaoClickado(true)
 
     const signUpSchema = joi.object({
-      email: joi.string().email({ tlds: { allow: false } }).required(),
+      name: joi.string().required(),
       password: joi.string().required()
     })
 
-    const user = { email, password }
+    const user = { name, password }
 
     const validation = signUpSchema.validate(user, { abortEarly: true })
     if (validation.error) {
@@ -34,14 +37,14 @@ export default function Login() {
 
     const cadastro = axios.post("http://localhost:5000/login",
       {
-        email,
+        name,
         password,
       })
 
     cadastro.then((r) => {
       setToken(r.data.token)
       setBotaoClickado(false)
-      navigate("/wallet")
+      navigate("/games")
     })
 
     cadastro.catch(error => {
@@ -56,14 +59,21 @@ export default function Login() {
       <h1>Vapor Store</h1>
 
       <form onSubmit={login}>
-        <input type="email" placeholder="E-mail" value={email} onChange={e => setEmail(e.target.value)} disabled={botaoClickado} />
-        <input type="password" placeholder="Senha" value={password} onChange={e => setpassword(e.target.value)} disabled={botaoClickado} />
+        <div className="loginBox">
+          <span>Nome de usuário Vapor</span>
+          <Input type="text" placeholder="" state={name} setState={setName} disabled={botaoClickado} />
+        </div>
+
+        <div className="loginBox">
+          <span>Senha</span>
+          <Input type="password" placeholder="" state={password} setState={setpassword} disabled={botaoClickado} />
+        </div>
 
         <Button type='submit' disabled={botaoClickado}>Entrar</Button>
 
       </form>
 
-      <StyledLink to={"/sign-up"}>Primeira vez? Cadastre-se!</StyledLink>
+      <StyledLink to={"/sign-up"}>Cadastre-se na Vapor Store<br /> e descubra milhares de jogos!</StyledLink>
 
     </Main>
   )
@@ -91,40 +101,17 @@ const Main = styled.div`
     display: flex;
     flex-direction: column;
 
+    gap: 25px;
+    margin-bottom: 100px;
+  }
+
+  form .loginBox {
+    display: flex;
+    flex-direction: column;
     gap: 6px;
-    margin-bottom: 25px;
+
+    font-size: 20px;
   }
-
-  form input {
-    width: 303px;
-    height: 45px;
-
-    border: 1px solid #D5D5D5;
-    border-radius: 5px;
-
-    font-size: 17px;
-    line-height: 23px;
-
-    ${props => props.disabled && "background-color: #F2F2F2"}
-  }
-
-  form input::placeholder {
-    color: #000000;
-    padding-left: 11px;
-  }
-`
-
-const Button = styled.button`
-  width: 303px;
-  height: 45px;
-
-  background: ${props => props.disabled ? "#171A21" : "#212429"};
-  border-radius: 4.63636px;
-  border: none;
-
-  color: #FFFFFF;
-  font-size: 20.976px;
-  line-height: 26px;
 `
 
 const StyledLink = styled(Link)`
@@ -133,4 +120,5 @@ const StyledLink = styled(Link)`
     font-weight: bold;
     font-size: 15px;
     line-height: 18px;
+    text-align: center;
 `

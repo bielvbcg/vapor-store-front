@@ -32,7 +32,8 @@ body {
   font-size: 14px;
   width: 375px;
   height: 667px;
-  background-color: #1B2939;
+  background: radial-gradient(farthest-corner at 667px 375px, #2A475E 0%, #1B2838 80%);
+  color: #E9E9E9;
 }
 
 ol, ul {

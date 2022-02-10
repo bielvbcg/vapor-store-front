@@ -4,6 +4,9 @@ import styled from 'styled-components';
 import axios from 'axios';
 import joi from "joi"
 
+import Button from "./Button.js"
+import Input from "./Input.js"
+
 export default function SignUp() {
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
@@ -70,10 +73,26 @@ export default function SignUp() {
       <h1>Vapor Store</h1>
 
       <form onSubmit={signUp}>
-        <input type="text" placeholder="Name" value={name} onChange={e => setName(e.target.value)} disabled={botaoClickado} />
-        <input type="email" placeholder="E-mail" value={email} onChange={e => setEmail(e.target.value)} disabled={botaoClickado} />
-        <input type="password" placeholder="Senha" value={password} onChange={e => setPassword(e.target.value)} disabled={botaoClickado} />
-        <input type="password" placeholder="Confirme a senha" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} disabled={botaoClickado} />
+
+        <div className="loginBox">
+          <span>Nome de usuário</span>
+          <Input type="text" placeholder="" state={name} setState={setName} disabled={botaoClickado} />
+        </div>
+
+        <div className="loginBox">
+          <span>E-mail</span>
+          <Input type="email" placeholder="" state={email} setState={setEmail} disabled={botaoClickado} />
+        </div>
+
+        <div className="loginBox">
+          <span>Senha</span>
+          <Input type="password" placeholder="" state={password} setState={setPassword} disabled={botaoClickado} />
+        </div>
+
+        <div className="loginBox">
+          <span>Confime sua senha</span>
+          <Input type="password" placeholder="" state={confirmPassword} setState={setConfirmPassword} disabled={botaoClickado} />
+        </div>
 
         <Button type='submit' disabled={botaoClickado}>Cadastrar</Button>
 
@@ -98,7 +117,7 @@ const Main = styled.div`
     font-size: 32px;
     line-height: 50px;
 
-    color: #FFFFFF;
+    color: #F1F1F1;
 
     margin: 40px 0;
   }
@@ -107,45 +126,21 @@ const Main = styled.div`
     display: flex;
     flex-direction: column;
 
-    gap: 6px;
+    gap: 20px;
     margin-bottom: 25px;
   }
 
-  form input {
-    width: 303px;
-    height: 45px;
+  form .loginBox {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
 
-    border: 1px solid #D5D5D5;
-    padding-left: 11px;
-    border-radius: 5px;
-
-    font-size: 17px;
-    line-height: 23px;
-
-    ${props => props.disabled && "background-color: #F2F2F2"}
+    font-size: 20px;
   }
-
-  form input::placeholder {
-    color: #000000;
-    padding-left: 11px;
-  }
-`
-
-const Button = styled.button`
-  width: 303px;
-  height: 45px;
-
-  background: ${props => props.disabled ? "#171A21" : "#212429"};
-  border-radius: 4.63636px;
-  border: none;
-
-  color: #FFFFFF;
-  font-size: 20.976px;
-  line-height: 26px;
 `
 
 const StyledLink = styled(Link)`
-    color: #FFFFFF;
+    color: #E9E9E9;
     text-decoration: none;
     font-weight: bold;
     font-size: 15px;

@@ -11,7 +11,7 @@ const InputHolder = styled.input`
     height: 45px;
 
     padding: 8px 6px;
-    border-radius: 3px;
+    border-radius: 5px;
 
     font-size: 17px;
     line-height: 23px;

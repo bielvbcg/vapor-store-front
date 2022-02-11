@@ -3,9 +3,12 @@ import { Link, useNavigate } from "react-router-dom"
 import styled from 'styled-components';
 import axios from 'axios';
 import joi from "joi"
+import dotenv from 'dotenv';
 
-import Button from "./Button.js"
 import Input from "./Input.js"
+import Button from "./Button.js"
+
+dotenv.config();
 
 export default function SignUp() {
   const [name, setName] = useState("")
@@ -46,7 +49,7 @@ export default function SignUp() {
       return
     }
 
-    const cadastro = axios.post("http://localhost:5000/sign-up", user)
+    const cadastro = axios.post(`http://localhost:5000/sign-up`, user)
 
     cadastro.then((r) => {
       navigate("/")

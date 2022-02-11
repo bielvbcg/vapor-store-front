@@ -4,11 +4,12 @@ import styled from 'styled-components';
 import axios from 'axios';
 import joi from "joi"
 import dotenv from 'dotenv';
-dotenv.config();
 
 import AppContext from '../contexts/AppContext';
 import Button from "./Button.js"
 import Input from "./Input.js"
+
+dotenv.config();
 
 export default function Login() {
   const [name, setName] = useState("")
@@ -37,7 +38,7 @@ export default function Login() {
       return
     }
 
-    const cadastro = axios.post(`${process.env.REACT_APP_API_BASE_URL}/login`,
+    const cadastro = axios.post(`http://localhost:5000/login`,
       {
         name,
         password,

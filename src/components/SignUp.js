@@ -4,10 +4,11 @@ import styled from 'styled-components';
 import axios from 'axios';
 import joi from "joi"
 import dotenv from 'dotenv';
-dotenv.config();
 
-import Button from "./Button.js"
 import Input from "./Input.js"
+import Button from "./Button.js"
+
+dotenv.config();
 
 export default function SignUp() {
   const [name, setName] = useState("")
@@ -48,7 +49,7 @@ export default function SignUp() {
       return
     }
 
-    const cadastro = axios.post(`${process.env.REACT_APP_API_BASE_URL}/sign-up`, user)
+    const cadastro = axios.post(`http://localhost:5000/sign-up`, user)
 
     cadastro.then((r) => {
       navigate("/")

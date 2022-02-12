@@ -1,10 +1,11 @@
 import { useContext, useState } from "react"
+import { useLocation } from "react-router-dom";
 import AppContext from "../../contexts/AppContext"
 import api from '../../services/api'
 
 export default function Checkout () {
-    const productId = "6204533642a9583cd09518a2" //temporary
-
+    const location = useLocation()
+    const products = location.state.map(v => v.name)
 
     const [form, setForm] = useState({
         name:'',
@@ -22,7 +23,7 @@ export default function Checkout () {
 
     function handleSubmit(e){
         e.preventDefault()
-        const promise = api.postCheckout({productId, infos: {...form}}, token)
+        const promise = api.postCheckout({products, infos: {...form}}, token)
         promise.then( () => {
             alert('show')
             // navigate products?
@@ -35,6 +36,11 @@ export default function Checkout () {
 
     return (
         <>
+            <div>
+                <h1>Seus produtos</h1>
+                {products.map((v, i) => <p key={i}>{v}</p>)}
+                {products.length === 0 && 'Adicione o que deseja no carrinho para finalizar a compra'}
+            </div>
             <form onSubmit={e => handleSubmit(e)}>
                 <input type="text"
                     name='name'
@@ -64,7 +70,7 @@ export default function Checkout () {
                     onChange={e => handleInput(e)}
                     value={form.cardNumber}
                 />
-                <button>Confirmar</button>
+                <button disabled={products.length === 0 ? true : false}>Confirmar</button>
             </form>
         </>
     )

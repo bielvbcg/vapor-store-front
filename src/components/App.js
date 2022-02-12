@@ -6,6 +6,7 @@ import Login from "./Login.js"
 import SignUp from "./SignUp.js"
 import Games from "./Games";
 import Checkout from "./Checkout/index.js"
+import Cart from "./Cart";
 
 export default function App() {
   const [token, setToken] = useState(null)
@@ -19,6 +20,7 @@ export default function App() {
           <Route path="/sign-up" element={<SignUp />}></Route>
           <Route path="/games" element={<Games />}></Route>
           <Route path="/checkout" element={<Checkout />}></Route>
+          <Route path="/cart" element={<Cart />}></Route>
         </Routes>
       </BrowserRouter>
     </AppContext.Provider>

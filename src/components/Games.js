@@ -6,6 +6,8 @@ import dotenv from 'dotenv';
 
 import AppContext from '../contexts/AppContext';
 import GameBox from './GameBox';
+import Footer from './Footer.js'
+import Header from './Header.js'
 
 dotenv.config();
 
@@ -28,6 +30,8 @@ export default function Games() {
 
   return (
     <>
+      <Header></Header>
+
       <GamesContainer>
 
         {games && games.map(({ name, img, price }) => (
@@ -35,6 +39,8 @@ export default function Games() {
         ))}
 
       </GamesContainer>
+
+      <Footer></Footer>
     </>
   )
 }
@@ -45,4 +51,5 @@ const GamesContainer = styled.div`
   grid-row-gap: 20px;
 
   padding: 20px;
+  margin: 75px 0;
 `

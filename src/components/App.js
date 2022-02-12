@@ -6,7 +6,7 @@ import Login from "./Login.js"
 import SignUp from "./SignUp.js"
 import Games from "./Games";
 import Checkout from "./Checkout/index.js"
-import Cart from "./Cart";
+import Cart from "./Cart/index.js";
 
 export default function App() {
   const [token, setToken] = useState(null)

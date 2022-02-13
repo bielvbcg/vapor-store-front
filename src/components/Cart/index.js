@@ -1,33 +1,24 @@
-import { useState } from "react"
+import { useContext } from "react"
 import { useNavigate } from "react-router-dom"
 import Container from "./style"
 
 import Footer from '../Footer.js'
 import Header from '../Header.js'
-
-const arr = [
-    { name: 'numero 1', img: 'https://unsplash.it/144/87', price: '2.00' },
-    { name: 'numero 2', img: 'https://unsplash.it/144/87', price: '4.00' },
-    { name: 'numero 3', img: 'https://unsplash.it/144/87', price: '6.00' },
-    { name: 'numero 4', img: 'https://unsplash.it/144/87', price: '8.00' },
-    { name: 'numero 4sdfaskjfbasdkjfs hba sdkjbhfsdjbf hgdsdhabdf', img: 'https://unsplash.it/144/87', price: '8.00' },
-    { name: 'numero 4', img: 'https://unsplash.it/144/87', price: '8.00' },
-    { name: 'numero 5', img: 'https://unsplash.it/144/87', price: '10.00' }
-]
+import AppContext from "../../contexts/AppContext"
 
 export default function Cart() {
-    const [array, setArray] = useState([...arr])
+    const {cart, setCart} = useContext(AppContext)
 
     const navigate = useNavigate()
 
     let total = 0
-    array.forEach(v => {
+    cart.forEach(v => {
         total += parseFloat(v.price)
     })
 
     function handleClick(position) {
-        array.splice(position, 1)
-        setArray([...array])
+        cart.splice(position, 1)
+        setCart([...cart])
     }
 
     function Line(props) {
@@ -48,20 +39,22 @@ export default function Cart() {
 
     return(
         <Container>
+            <Header/>
             <h1>Carrinho</h1>
             <div className="lines">
-                {array.map((v, i) => <Line infos={v} key={i} position={i}/>
+                {cart.map((v, i) => <Line infos={v} key={i} position={i}/>
                 )}
-                {array.length === 0 && 'Você não possui nada no carrinho'}
+                {cart.length === 0 && 'Você não possui nada no carrinho'}
             </div>
             
             <div className="footer">
                 <p>TOTAL: R$ {total.toFixed(2).toString().replace('.', ',')}</p>
 
                 <button onClick={() => {
-                    navigate("/checkout", { state: array })
+                    navigate("/checkout", { state: cart })
                 }}>Confirmar</button>
             </div>
+            <Footer/>
         </Container>
 
     )

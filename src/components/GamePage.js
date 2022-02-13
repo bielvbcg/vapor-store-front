@@ -11,7 +11,7 @@ import Header from './Header.js'
 export default function GamePage() {
   const [gameData, setGameData] = useState(null)
   const { gameName } = useParams()
-  const { token } = useContext(AppContext)
+  const { token, cart, setCart } = useContext(AppContext)
   let navigate = useNavigate()
 
   useEffect(() => {
@@ -32,6 +32,7 @@ export default function GamePage() {
   }, [])
 
   function addToCart() {
+    setCart([...cart, {name: gameData.name, img: gameData.img, price: gameData.price}])
     navigate('/games')
   }
 

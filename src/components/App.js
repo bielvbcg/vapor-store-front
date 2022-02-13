@@ -11,7 +11,8 @@ import Cart from "./Cart/index.js";
 
 export default function App() {
   const [token, setToken] = useState(null)
-  const context = { token, setToken }
+  const [cart, setCart] = useState([])
+  const context = { token, setToken, cart, setCart }
 
   return (
     <AppContext.Provider value={context}>

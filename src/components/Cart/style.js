@@ -9,7 +9,7 @@ const Container = styled.main`
     justify-content: space-between;
 
     h1{
-        margin: 40px auto 0 auto;
+        margin: 100px auto 0 auto;
 
         font-family: 'Saira Stencil One', cursive;
         font-size: 32px;
@@ -63,7 +63,7 @@ const Container = styled.main`
     }
 
     .footer{
-        margin: 18px 0 10px 10px;
+        margin: 18px 0 80px 10px;
 
         display: flex;
         flex-direction: column;

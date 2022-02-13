@@ -6,7 +6,7 @@ const Container = styled.main`
         flex-direction: column;
 
         h1{
-            margin: 40px auto 0 auto;
+            margin: 100px auto 0 auto;
 
             font-family: 'Saira Stencil One', cursive;
             font-size: 32px;
@@ -32,6 +32,8 @@ const Container = styled.main`
     }
 
     form{
+        margin-bottom: 100px;
+
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -59,6 +61,7 @@ const Container = styled.main`
             border-radius: 4.63636px;
             border: none;
             margin-top: 20px;
+            margin-bottom: 80px;
 
             color: #E9E9E9;
             font-size: 20.976px;

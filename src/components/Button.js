@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-export default function Button(props) {
+export default function Button({ children, click }) {
   return (
-    <ButtonHolder>{props.children}</ButtonHolder>
+    <ButtonHolder onClick={click && click}>{children}</ButtonHolder>
   )
 }
 
@@ -10,7 +10,7 @@ const ButtonHolder = styled.button`
   width: 303px;
   height: 45px;
 
-  background: radial-gradient(farthest-corner at 303px 45px, #1A9FFF 0%, #00BBFF 80%);
+  background: radial-gradient( #1A9FFF 0%, #00BBFF 80%);
   border-radius: 4.63636px;
   border: none;
 

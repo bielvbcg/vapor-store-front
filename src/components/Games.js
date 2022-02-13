@@ -34,8 +34,8 @@ export default function Games() {
 
       <GamesContainer>
 
-        {games && games.map(({ name, img, price }) => (
-          <GameBox name={name} img={img} price={price} />
+        {games && games.map(({ name, img, price }, i) => (
+          <GameBox key={i} name={name} img={img} price={price} />
         ))}
 
       </GamesContainer>

@@ -1,12 +1,15 @@
 import { useContext, useState } from "react"
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import AppContext from "../../contexts/AppContext"
 import api from '../../services/api'
+import Footer from "../Footer";
+import Header from "../Header";
 import Container from "./style";
 
 export default function Checkout() {
     const location = useLocation()
-    const products = location.state.map(v => v.name)
+    let products = location.state.map(v => v.name)
+    const navigate = useNavigate()
 
     const [form, setForm] = useState({
         name: '',
@@ -15,8 +18,7 @@ export default function Checkout() {
         cardNumber: ''
     })
 
-    //const {token} = useContext(AppContext)
-    const token = '76a41e31-b51c-4269-8a64-3d6fc3952b83' //temporary
+    const { token } = useContext(AppContext)
 
     function handleInput(e) {
         setForm({ ...form, [e.target.name]: e.target.value })
@@ -24,10 +26,11 @@ export default function Checkout() {
 
     function handleSubmit(e) {
         e.preventDefault()
+        products = products.map(v => v.toLowerCase().replace(' ', '-'))
         const promise = api.postCheckout({ products, infos: { ...form } }, token)
         promise.then(() => {
             alert('show')
-            // navigate products?
+            navigate('/games')
         })
         promise.catch(error => {
             console.log(error.response.data);
@@ -37,6 +40,7 @@ export default function Checkout() {
 
     return (
         <Container>
+            <Header />
             <div className="topContainer">
                 <h1>Produtos</h1>
                 <div className="products">
@@ -75,6 +79,7 @@ export default function Checkout() {
                 />
                 <button disabled={products.length === 0 ? true : false}>Confirmar</button>
             </form>
+            <Footer />
         </Container>
     )
 }

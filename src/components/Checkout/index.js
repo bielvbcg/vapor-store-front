@@ -2,6 +2,7 @@ import { useContext, useState } from "react"
 import { useLocation } from "react-router-dom";
 import AppContext from "../../contexts/AppContext"
 import api from '../../services/api'
+import Container from "./style";
 
 export default function Checkout () {
     const location = useLocation()
@@ -35,11 +36,13 @@ export default function Checkout () {
     }
 
     return (
-        <>
-            <div>
-                <h1>Seus produtos</h1>
-                {products.map((v, i) => <p key={i}>{v}</p>)}
-                {products.length === 0 && 'Adicione o que deseja no carrinho para finalizar a compra'}
+        <Container>
+            <div className="topContainer">
+                <h1>Produtos</h1>
+                <div className="products">
+                    {products.map((v, i) => <p key={i}>{i+1} - {v}</p>)}
+                    {products.length === 0 && 'Adicione o que deseja no carrinho para finalizar a compra'}
+                </div>
             </div>
             <form onSubmit={e => handleSubmit(e)}>
                 <input type="text"
@@ -72,6 +75,6 @@ export default function Checkout () {
                 />
                 <button disabled={products.length === 0 ? true : false}>Confirmar</button>
             </form>
-        </>
+        </Container>
     )
 }

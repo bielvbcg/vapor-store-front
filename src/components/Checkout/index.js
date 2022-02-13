@@ -4,28 +4,28 @@ import AppContext from "../../contexts/AppContext"
 import api from '../../services/api'
 import Container from "./style";
 
-export default function Checkout () {
+export default function Checkout() {
     const location = useLocation()
     const products = location.state.map(v => v.name)
 
     const [form, setForm] = useState({
-        name:'',
-        cpf:'',
-        email:'',
-        cardNumber:''
+        name: '',
+        cpf: '',
+        email: '',
+        cardNumber: ''
     })
 
     //const {token} = useContext(AppContext)
     const token = '76a41e31-b51c-4269-8a64-3d6fc3952b83' //temporary
 
-    function handleInput(e){
-        setForm({...form, [e.target.name]: e.target.value})
+    function handleInput(e) {
+        setForm({ ...form, [e.target.name]: e.target.value })
     }
 
-    function handleSubmit(e){
+    function handleSubmit(e) {
         e.preventDefault()
-        const promise = api.postCheckout({products, infos: {...form}}, token)
-        promise.then( () => {
+        const promise = api.postCheckout({ products, infos: { ...form } }, token)
+        promise.then(() => {
             alert('show')
             // navigate products?
         })
@@ -40,7 +40,7 @@ export default function Checkout () {
             <div className="topContainer">
                 <h1>Produtos</h1>
                 <div className="products">
-                    {products.map((v, i) => <p key={i}>{i+1} - {v}</p>)}
+                    {products.map((v, i) => <p key={i}>{i + 1} - {v}</p>)}
                     {products.length === 0 && 'Adicione o que deseja no carrinho para finalizar a compra'}
                 </div>
             </div>

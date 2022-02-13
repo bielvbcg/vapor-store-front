@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import Container from "./style"
 
 import Footer from '../Footer.js'
 import Header from '../Header.js'
@@ -8,6 +9,8 @@ const arr = [
     { name: 'numero 1', img: 'https://unsplash.it/144/87', price: '2.00' },
     { name: 'numero 2', img: 'https://unsplash.it/144/87', price: '4.00' },
     { name: 'numero 3', img: 'https://unsplash.it/144/87', price: '6.00' },
+    { name: 'numero 4', img: 'https://unsplash.it/144/87', price: '8.00' },
+    { name: 'numero 4sdfaskjfbasdkjfs hba sdkjbhfsdjbf hgdsdhabdf', img: 'https://unsplash.it/144/87', price: '8.00' },
     { name: 'numero 4', img: 'https://unsplash.it/144/87', price: '8.00' },
     { name: 'numero 5', img: 'https://unsplash.it/144/87', price: '10.00' }
 ]
@@ -32,9 +35,9 @@ export default function Cart() {
         return (
             <div className={`line`}>
                 <img src={img} alt={name} />
-                <div>
+                <div className="texts">
                     <p>{name}</p>
-                    <span>{price}</span>
+                    <span>R$ {price.replace('.',',')}</span>
                 </div>
                 <button onClick={() => {
                     handleClick(props.position)
@@ -43,22 +46,23 @@ export default function Cart() {
         )
     }
 
-    return (
-        <>
-            <Header></Header>
+    return(
+        <Container>
+            <h1>Carrinho</h1>
+            <div className="lines">
+                {array.map((v, i) => <Line infos={v} key={i} position={i}/>
+                )}
+                {array.length === 0 && 'Você não possui nada no carrinho'}
+            </div>
+            
+            <div className="footer">
+                <p>TOTAL: R$ {total.toFixed(2).toString().replace('.', ',')}</p>
 
-            {array.map((v, i) => <Line infos={v} key={i} position={i} />
-            )}
-            {array.length === 0 && 'Você não possui nada no carrinho'}
-
-            <div>
-                <p>R$ {total.toFixed(2)}</p>
                 <button onClick={() => {
                     navigate("/checkout", { state: array })
                 }}>Confirmar</button>
             </div>
+        </Container>
 
-            <Footer></Footer>
-        </>
     )
 }

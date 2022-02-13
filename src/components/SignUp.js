@@ -78,7 +78,7 @@ export default function SignUp() {
       <form onSubmit={signUp}>
 
         <div className="loginBox">
-          <span>Nome de usuário</span>
+          <span>Nome de usuário Vapor</span>
           <Input type="text" placeholder="" state={name} setState={setName} disabled={botaoClickado} />
         </div>
 

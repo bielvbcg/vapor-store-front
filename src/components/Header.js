@@ -1,6 +1,7 @@
 import { useNavigate, useLocation } from "react-router-dom"
 import { useContext } from "react"
 import styled from 'styled-components';
+import img from "../images/V-Store-Branco.png"
 
 import AppContext from '../contexts/AppContext';
 
@@ -19,7 +20,9 @@ export default function Header() {
   return (
     <HeaderBox>
       <ion-icon name="chevron-back-outline" onClick={() => { location.pathname !== "/games" && navigate(-1) }}></ion-icon>
-      <span>Vapor Store</span>
+      <span>
+        <img src={img} alt="" />
+      </span>
       <ion-icon name="log-out-outline" onClick={logout}></ion-icon>
     </HeaderBox>
   )
@@ -42,5 +45,9 @@ const HeaderBox = styled.div`
   font-size: 30px;
 
   box-shadow: 0px 0px 8px 5px rgba(23,26,33,0.92);
-  background: linear-gradient(225deg , #171A21 15% , #2A475E 90%)
+  background: linear-gradient(225deg , #171A21 15% , #2A475E 90%);
+
+  span img{
+    height: 95px;
+  }
 `

@@ -48,7 +48,7 @@ export default function Cart() {
             </div>
             
             <div className="footer">
-                <p>TOTAL: R$ {total.toFixed(2).toString().replace('.', ',')}</p>
+                <p>TOTAL: <span>R$ {total.toFixed(2).toString().replace('.', ',')}</span></p>
 
                 <button onClick={() => {
                     navigate("/checkout", { state: cart })

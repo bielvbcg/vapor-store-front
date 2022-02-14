@@ -22,7 +22,7 @@ export default function Games() {
       ` }
     }
 
-    const gamesPromisse = axios.get(`http://localhost:5000/games`, config)
+    const gamesPromisse = axios.get(`https://vapor-store-back.herokuapp.com/games`, config)
 
     gamesPromisse.then((response) => { setGames(response.data) })
     gamesPromisse.catch(error => console.log(error.message))

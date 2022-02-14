@@ -9,7 +9,7 @@ const Container = styled.main`
     justify-content: space-between;
 
     h1{
-        margin: 100px auto 0 auto;
+        margin: 90px auto 10px auto;
 
         font-family: 'Saira Stencil One', cursive;
         font-size: 32px;
@@ -26,6 +26,7 @@ const Container = styled.main`
         width: 100%;
         padding: 0 10px;
         margin-top: 10px;
+        box-shadow: 0px 0px 8px 5px rgba(23,26,33,0.92);
 
         display: flex;
 
@@ -37,12 +38,16 @@ const Container = styled.main`
 
         .texts{
             width: 50%;
-            margin-left: 5px;
+            margin: 10px;
             font-size: 15px;	
             overflow: hidden;
             
-            p{
-                margin-bottom: 5px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            span{
+                color: #2B87D9;
             }
         }
 
@@ -70,6 +75,9 @@ const Container = styled.main`
 
         p{
             font-size: 20px;
+            span{
+                color: #2B87D9;
+            }
         }
 
         button{

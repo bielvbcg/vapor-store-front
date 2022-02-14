@@ -38,7 +38,7 @@ export default function Login() {
       return
     }
 
-    const cadastro = axios.post(`http://localhost:5000/login`,
+    const cadastro = axios.post(`https://vapor-store-back.herokuapp.com/login`,
       {
         name,
         password,

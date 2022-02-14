@@ -15,8 +15,11 @@ const Container = styled.main`
         }
 
         .products{
-            height: 150px;
+            width: 90%;
+            height: 95px;
             margin: 20px 10px;
+            padding-top: 5px;
+            box-shadow: 0px 0px 8px 5px #8f98a0;
 
             font-size: 20px;
             text-align: center;

@@ -21,7 +21,7 @@ export default function GamePage() {
        ` }
     }
 
-    const gamePromisse = axios.get(`http://localhost:5000/games/${gameName}`, config)
+    const gamePromisse = axios.get(`https://vapor-store-back.herokuapp.com/games/${gameName}`, config)
 
     gamePromisse.then((response) => {
       const nameHolder = response.data.name.split("-").map(string => string.charAt(0).toUpperCase() + string.slice(1)).join(" ")

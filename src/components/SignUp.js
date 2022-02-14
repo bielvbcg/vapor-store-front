@@ -49,7 +49,7 @@ export default function SignUp() {
       return
     }
 
-    const cadastro = axios.post(`http://localhost:5000/sign-up`, user)
+    const cadastro = axios.post(`https://vapor-store-back.herokuapp.com/sign-up`, user)
 
     cadastro.then((r) => {
       navigate("/")
